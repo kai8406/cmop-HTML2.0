@@ -28,6 +28,9 @@
 	  padding-top: 60px;
 	  padding-bottom: 40px;
 	}
+	 .sidebar-nav {
+        padding: 9px 0;
+      }
 </style>
 <link href="./static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="./static/jquery-uniform/uniform.default.css" rel="stylesheet">
@@ -51,15 +54,19 @@
     
  <script type="text/javascript">
  $(document).ready(function(){
+	 
 	 $("input:radio,input:checkbox,input:file,select").uniform();
+	 
+	 
+	 
+	 
  });
  </script>
 <title>CMOP HTML V2.0</title>
 
 </head>
 <body>
-
- <div class="navbar navbar-inverse navbar-fixed-top">
+     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -69,54 +76,31 @@
           </a>
           <a class="brand" href="./index.html">Sobey`CMOP</a>
           <div class="nav-collapse collapse">
-          
-         	<form class="navbar-form pull-right" action="./home.html">
-				<input class="span2" type="text" placeholder="Email"> <input
-					class="span2" type="password" placeholder="Password">
-				<button type="submit" class="btn">登录</button>
-				<a type="submit" class="btn" href="./register.html">注册</a>
-			</form>
-            
+            <p class="navbar-text pull-right">
+              Logged in as <a href="#" class="navbar-link">申请</a>
+            </p>
+            <ul class="nav">
+              <li><a href="#about">Resource</a></li>
+              <li class="active"><a href="./apply.html">Apply</a></li>
+              <li><a href="#contact">Account</a></li>
+            </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
 
-    <div class="container">
-
-      <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
-        <h1>Hello, Sobey CMOP!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-      </div>
-
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="span4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div>
-        <div class="span4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-       </div>
-        <div class="span4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div>
-      </div>
+	<div class="container">
+	
+	
+	 						
 
       <hr>
 
-      <footer style="text-align: center;">
-        <p>Copyright &copy; 2013 Sobey</p>
+      <footer>
+        <p>&copy; Company 2012</p>
       </footer>
 
-    </div> <!-- /container -->
+    </div><!--/.fluid-container-->
 </body>
 </html>
 
