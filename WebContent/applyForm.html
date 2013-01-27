@@ -24,14 +24,28 @@
 <!-- Le css styles ==================================================== -->
 <link href="./static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
-	body {
-	  padding-top: 60px;
-	  padding-bottom: 40px;
-	}
-	 .sidebar-nav {
-        padding: 9px 0;
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
       }
-</style>
+
+      .form-signin {
+       	max-width: 640px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+
+
+    </style>
 <link href="./static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="./static/jquery-uniform/uniform.default.css" rel="stylesheet">
 <link href="./static/jquery-ui/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
@@ -55,9 +69,94 @@
  <script type="text/javascript">
  $(document).ready(function(){
 	 
-	 $("input:radio,input:checkbox,input:file,select").uniform();
+	 $("input:radio,input:checkbox,input:file").uniform();
+	 
+	
+	 
+	 $("form").validate({
+			errorClass: "help-inline",
+			errorElement: "span",
+			highlight:function(element, errorClass, validClass) {
+				
+				  //var $serviceStart = $("input.datepicker:first");
+				//  var $serviceEnd = $("input.datepicker:last");
+				  
+				  //TODO 比较两个参数的值.然后放入#message
+				  
+				$(element).closest('.control-group').addClass('error');
+				
+			},
+			unhighlight: function(element, errorClass, validClass) {
+				$(element).closest('.control-group').removeClass('error');
+			}
+			
+		});
 	 
 	 
+	 
+	 // =========== datepicker ==============
+	 
+ 	$(".datepicker").datepicker();
+	 
+	 
+	$("#serviceStart").val(getDatePlusMonthNum(0));
+	 $("#serviceEnd").val(getDatePlusMonthNum(0));
+	 
+	 
+	 function getDatePlusMonthNum(monthNum) {
+		 
+		 
+		 var CurrentDate = new Date();
+			
+			CurrentDate.setMonth(CurrentDate.getMonth() + monthNum );
+			
+			var year = CurrentDate.getFullYear();
+			var month = CurrentDate.getMonth()+1;
+			var day = CurrentDate.getDate();
+			
+			 
+			if (month <= 9) {
+				month = "0" + month;
+			}
+			
+		
+			if(month == "00"){
+				month = "01";
+			}
+			
+			if (day <= 9) {
+				day = "0" + day;
+			}
+			
+			
+			return year + "-" + month + "-" + day;
+		}
+	 
+	 
+	 function checkTime(startTime,endTime){  
+		 
+		 	alert(startTime);
+		 
+			var currentTime = getDateByMonthNum(0);
+			
+		    if(startTime.length>0 && endTime.length>0){  
+		    	
+		        var startTmp=startTime.split("-");  
+		        var endTmp=endTime.split("-");  
+		        var currentTmp = currentTime.split("-");
+		        var sd=new Date(startTmp[0],startTmp[1],startTmp[2]);  
+		        var ed=new Date(endTmp[0],endTmp[1],endTmp[2]);  
+		        var vd=new Date(currentTmp[0],currentTmp[1],currentTmp[2]);  
+		        
+		        if(sd.getTime()>ed.getTime()){   
+		            return "开始日期不能大于结束日期";     
+		        }    
+		        if(vd.getTime()>sd.getTime()){   
+		              return "开始日期不能小于当前日期";     
+		        }
+		    }     
+		    return "";     
+		} 
 	 
 	 
  });
@@ -66,7 +165,8 @@
 
 </head>
 <body>
-     <div class="navbar navbar-inverse navbar-fixed-top">
+
+   <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -88,19 +188,81 @@
         </div>
       </div>
     </div>
+    
 
 	<div class="container">
 	
 	
-	 						
+	
+		<form class="form-signin form-horizontal" action="./signin.html">
+		
+		<fieldset>
+			<legend><small>服务申请</small></legend>
+			
+			<!-- <div id="message" class="alert alert-error in ">
+				<button data-dismiss="alert" class="close" type="button">×</button>
+				<span></span>
+			</div> -->
+		
+		
+		<div class="control-group">
+			<label class="control-label" for="loginName">服务标签</label>
+			<div class="controls">
+				<input type="text" id="serviceTag" name="serviceTag" placeholder="...服务标签">
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="priority">优先级</label>
+			<div class="controls">
+				<select id="priority" name="priority">
+					<option value="1">普通</option>
+					<option value="2">高</option>
+					<option value="3">紧急</option>
+				</select>
+			</div>
+		</div>
 
-      <hr>
 
-      <footer>
-        <p>&copy; Company 2012</p>
-      </footer>
+		<div class="control-group">
+		
+			<label class="control-label" for="serviceStart">服务开始时间</label>
+			<div class="controls">
+				<input type="time" id="serviceStart" name="serviceStart" class="datepicker required"  placeholder="...服务开始时间">
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="serviceEnd">服务结束时间</label>
+			<div class="controls">
+				<input type="time" id=serviceEnd name="serviceEnd" class="datepicker required"  placeholder="...服务结束时间">
+			</div>
+		</div>
+		
+		<div class="control-group">
+				<label class="control-label" for="description">用途描述</label>
+			<div class="controls">
+				<textarea rows="3" id="description" name="description" placeholder="...用途描述"
+					maxlength="500" class="required "></textarea>
+			</div>
+		</div>
+		
+		 
+		 
+	     <div class="form-actions">
+			<a class="btn " onclick="history.back()">返回</a>
+			<button class="btn  btn-primary" type="submit">确定</button>
+	    </div>
+		</fieldset>
+		</form>
+    
+  	 	<hr>
+	
+     	<footer style="text-align: center;">
+       	<p>Copyright &copy; 2013 Sobey</p>
+	</footer>
 
-    </div><!--/.fluid-container-->
+    </div> <!-- /container -->
 </body>
 </html>
 

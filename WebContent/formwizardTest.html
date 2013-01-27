@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>cmop v2.0</title>
+<meta name="description" content="cmop v2.0">
+<meta name="author" content="liukai">
+
+<!-- Le Mobile Specific -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Le favicon and touch icons -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="./static/common/img/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="./static/common/img/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="./static/common/img/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="./static/common/img/ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="./static/common/img/ico/favicon.png">
+
+<!-- Le css styles ==================================================== -->
+<link href="./static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+	body {
+	  padding-top: 60px;
+	  padding-bottom: 40px;
+	}
+	 .sidebar-nav {
+        padding: 9px 0;
+      }
+</style>
+<link href="./static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="./static/jquery-uniform/uniform.default.css" rel="stylesheet">
+<link href="./static/jquery-ui/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+<link href="./static/common/css/style.css" rel="stylesheet">
+<!--[if lt IE 7 ]><![endif]-->
+<!--[if IE 8 ]><![endif]-->
+<!--[if IE 9 ]><![endif]-->
+
+ <!-- Le javascript  ================================================== -->
+ <script src="./static/jquery/jquery.min.js"></script>
+ <script src="./static/jquery-uniform/jquery.uniform.min.js"></script>
+ <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+ <script src="./static/jquery-ui/js/jquery-ui-1.8.21.custom.min.js"></script>
+ <script src="./static/jquery-ui/js/jquery.ui.datepicker-zh-CN.js"></script>
+ <script src="./static/jquery-validation/jquery.validate.js"></script>
+ <script src="./static/jquery-validation/messages_zh.js"></script>
+ <script src="./static/jquery-formwizard/jquery-ui-1.8.5.custom.min.js"></script>
+ <script src="./static/jquery-formwizard/jquery.form.wizard.js"></script>
+ <script src="./static/common/js/custom.js"></script>
+ 
+
+    
+ <script type="text/javascript">
+ $(document).ready(function(){
+	 
+	 $("input:radio,input:checkbox,input:file,select").uniform();
+	 
+	 $("#form-wizard").formwizard({ 
+			formPluginEnabled: true,
+			validationEnabled: true,
+			focusFirstInput : true,
+			disableUIStyles : true,
+		
+			formOptions :{
+				success: function(data){$("#status").fadeTo(500,1,function(){ $(this).html("<span>Form was submitted!</span>").fadeTo(5000, 0); })},
+				beforeSubmit: function(data){$("#submitted").html("<span>Form was submitted with ajax. Data sent to the server: " + $.param(data) + "</span>");},
+				dataType: 'json',
+				resetForm: true
+			},
+			validationOptions : {
+				rules: {
+					username: "required",
+					password: "required",
+					password2: {
+						equalTo: "#password"
+					},
+					email: { required: true, email: true },
+					eula: "required"
+				},
+				messages: {
+					username: "Please enter your name or username",
+					password: "You must enter the password",
+					password2: { equalTo: "Password don't match" },
+					email: { required: "Please, enter your email", email: "Correct email format is name@domain.com" },
+					eula: "You must accept the eula"
+				},
+				errorClass: "help-inline",
+				errorElement: "span",
+				highlight:function(element, errorClass, validClass) {
+				$(element).parents('.control-group').addClass('error');
+				},
+				unhighlight: function(element, errorClass, validClass) {
+					$(element).parents('.control-group').removeClass('error');
+				}
+			}
+		});	
+	 
+	 
+	 
+	 
+ });
+ </script>
+<title>CMOP HTML V2.0</title>
+
+</head>
+<body>
+     <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="./index.html">Sobey`CMOP</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              Logged in as <a href="#" class="navbar-link">申请</a>
+            </p>
+            <ul class="nav">
+              <li><a href="#about">Resource</a></li>
+              <li class="active"><a href="./apply.html">Apply</a></li>
+              <li><a href="#contact">Account</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+	 
+	 
+	 <div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="widget-box">
+							<div class="widget-title">
+								<span class="icon">
+									<i class="icon-pencil"></i>
+								</span>
+								<h5>Form wizard with validation</h5>
+							</div>
+							<div class="widget-content nopadding">
+								<form id="form-wizard" class="form-horizontal" method="post">
+									<div id="form-wizard-1" class="step">
+										<div class="control-group">
+											<label class="control-label">Username</label>
+											<div class="controls">
+												<input id="username" type="text" name="username" />
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label">Password</label>
+											<div class="controls">
+												<input id="password" type="password" name="password" />
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label">Confirm Password</label>
+											<div class="controls">
+												<input id="password2" type="password" name="password2" />
+											</div>
+										</div>
+										
+									</div>
+									<div id="form-wizard-2" class="step">
+										<div class="control-group">
+											<label class="control-label">Email</label>
+											<div class="controls">
+												<input id="email" type="text" name="email" />
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label">EULA Acceptation</label>
+											<div class="controls">
+												<input id="eula" type="checkbox" name="eula" />
+											</div>
+										</div>
+									</div>
+									<div class="form-actions">
+											<input id="back" class="btn btn-primary" type="reset" value="Back" />
+											<input id="next" class="btn btn-primary" type="submit" value="Next" />
+											<div id="status"></div>
+									</div>
+									<div id="submitted"></div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row-fluid">
+					<div id="footer" class="span12">
+						2012 &copy; Unicorn Admin. Brought to you by <a href="https://wrapbootstrap.com/user/diablo9983">diablo9983</a>
+					</div>
+				</div>
+			</div>
+			
+			
+</body>
+</html>
+
+
+
+
+
+
+
+
+
