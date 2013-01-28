@@ -1,11 +1,4 @@
-﻿.quick-actions{
-    display: inline-block;
-    list-style: none outside none;
-    margin: 20px 0 10px;
-    text-align: center;
-}
-
-.quick-actions li{
+﻿.quick-actions li{
     background-color: #F6F6F6;
 	background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#F9F9F9), to(#EDEDED));
 	background-image: -webkit-linear-gradient(top, #F9F9F9 0%, #EDEDED 100%);
@@ -20,24 +13,36 @@
     line-height: 18px;
     margin: 0 10px 10px;
     padding: 0 10px;
+    min-width: 120px;
+    padding: 0;
 }
-.quick-actions li {
-	min-width: 120px;
-}
-.quick-actions li {
-	padding: 0;
-}
-
-.quick-actions li a {
-	padding: 10px 30px;
-}
-
 
 .quick-actions li a {
 	text-align: center !important;
 	display: block;
 	color: #666666;
 	text-shadow: 0 1px 0 #ffffff;
+	padding: 10px 30px;
 }
 
- 
+ /* 显示纯文本的时候,匹配 .controls 的高度 */
+.plain-text {
+	padding: 5px 0px;
+}
+
+.table th {
+	height: auto;
+	padding: 5px 10px 2px;
+	border-bottom: 0;
+	text-align: center;
+	color: #666666;
+}
+
+label.search-text {
+	width: 60px;
+}
+
+/* 高级搜索框*/
+div.options {
+	display: none;
+}
