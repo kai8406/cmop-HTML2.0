@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>cmop v2.0</title>
+<meta name="description" content="cmop v2.0">
+<meta name="author" content="liukai">
+
+<!-- Le Mobile Specific -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Le favicon and touch icons -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="./static/common/img/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="./static/common/img/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="./static/common/img/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="./static/common/img/ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="./static/common/img/ico/favicon.png">
+
+<!-- Le css styles ==================================================== -->
+<link href="./static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+
+      .form-signin {
+       	max-width: 640px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+	  .clone{
+	    line-height: 18px;
+		margin: 0 10px 10px;
+		padding: 0 10px;
+		min-width: 80px;
+		margin-left: 0px;
+		padding: 0;
+		padding: 10px 80px;
+	  }
+	  
+	  .clone div{
+	  }
+
+    </style>
+<link href="./static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="./static/jquery-uniform/uniform.default.css" rel="stylesheet">
+<link href="./static/jquery-ui/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+<link href="./static/common/css/style.css" rel="stylesheet">
+<!--[if lt IE 7 ]><![endif]-->
+<!--[if IE 8 ]><![endif]-->
+<!--[if IE 9 ]><![endif]-->
+
+ <!-- Le javascript  ================================================== -->
+ <script src="./static/jquery/jquery.min.js"></script>
+ <script src="./static/jquery-uniform/jquery.uniform.min.js"></script>
+ <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+ <script src="./static/jquery-ui/js/jquery-ui-1.8.21.custom.min.js"></script>
+ <script src="./static/jquery-ui/js/jquery.ui.datepicker-zh-CN.js"></script>
+ <script src="./static/jquery-validation/jquery.validate.js"></script>
+ <script src="./static/jquery-validation/messages_zh.js"></script>
+ <script src="./static/common/js/custom.js"></script>
+ 
+
+    
+ <script type="text/javascript">
+ 
+ $(document).ready(function(){
+	 
+	 $("input:radio,input:checkbox,input:file").uniform();
+	 
+	 $("form").validate({
+			errorClass: "help-inline",
+			errorElement: "span",
+			highlight:function(element, errorClass, validClass) {
+				$(element).closest('.control-group').addClass('error');
+			},
+			unhighlight: function(element, errorClass, validClass) {
+				$(element).closest('.control-group').removeClass('error');
+			}
+			
+		});
+	 
+	 
+	 $(document).on("click", "#createBtn", function() {
+		 
+			if (!$("form").valid()) {
+				return false;
+			}
+		 
+			var protocol = $("#protocol").val();
+			var portRange = $("#portRange").val();
+			var visitSource = $("#visitSource").val();
+			
+			if (!$("#inputForm").valid()) {
+				return false;
+			}
+			
+			
+			//如果重复,则删除重复的项.
+			
+			$("#resourcesDIV div.resources").each(function() {
+				var $this = $(this);
+				$this.find("input[name='protocols']").val() == protocol && $this.find("input[name='portRanges']").val() == portRange && $this.find("input[name='visitSources']").val() == visitSource && $this.remove();
+			});
+			
+			//拼装资源alert信息
+			
+			var html = '';
+			html += '<div class="resources alert alert-block alert-info fade in">';
+			html += '<button data-dismiss="alert" class="close" type="button">×</button>';
+			html += '<div class="row-fluid">';
+			html += '<span class="span2">' + protocol + '</span>';
+			html += '<span class="span2">' + portRange + '</span>';
+			html += '<span class="span6">' + visitSource + '</span>';
+			html += '<input type="hidden" value="' + protocol + '" name="protocols">';
+			html += '<input type="hidden" value="' + portRange + '" name="portRanges">';
+			html += '<input type="hidden" value="' + visitSource + '" name="visitSources">';
+			html += '</div>';
+			html += '</div>';
+			$("#resourcesDIV").append(html);
+			$("#portRange,#visitSource").val('');
+		});        
+	 		
+	 
+	 
+ });
+ </script>
+<title>CMOP HTML V2.0</title>
+
+</head>
+<body>
+
+   <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="./index.html">Sobey`CMOP</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              Logged in as <a href="#" class="navbar-link">申请</a>
+            </p>
+            <ul class="nav">
+              <li><a href="#about">Resource</a></li>
+              <li class="active"><a href="./apply.html">Apply</a></li>
+              <li><a href="#contact">Account</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    
+
+	<div class="container">
+	
+	
+	
+		<form id="inputForm" class="form-signin form-horizontal" action="./signin.html">
+		
+		<fieldset>
+			<legend><small>ESG申请</small></legend>
+			
+		  <div id="message" class="alert alert-error in ">
+				<button data-dismiss="alert" class="close" type="button">×</button>
+				<span>错误信息</span>
+			</div>  
+		
+		<div class="control-group">
+				<label class="control-label" for="description">安全组描述</label>
+			<div class="controls">
+				<input type="text" id="description" name="description" class="required" maxlength="45" placeholder="...安全组的描述">
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="protocol">协议</label>
+			<div class="controls">
+				<select id="protocol">
+					<option value="TCP">TCP</option>
+					<option value="UDP">UDP</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="visitSource">访问源</label>
+			<div class="controls">
+				<input type="text" id="visitSource" class="required" placeholder="80 or 80,8080 or 8080/65535">
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="portRange">端口范围</label>
+			<div class="controls">
+				<input type="text" id="portRange" class="required" placeholder="80 or 80,8080 or 8080/65535">
+			</div>
+		</div>
+		
+	
+		
+		<div class="control-group">
+			<label class="control-label" for="create"></label>
+			<div class="controls">
+				<input id="createBtn" type="button" class="btn" value="生成规则">
+			</div>
+		</div>
+		
+		<div id="resourcesDIV"></div>
+		 
+		 
+	     <div class="form-actions">
+			<a class="btn " onclick="history.back()">返回</a>
+			<button class="btn  btn-primary" type="submit">确定</button>
+	    </div>
+		</fieldset>
+		</form>
+    
+  	 	<hr>
+	
+     	<footer style="text-align: center;">
+       	<p>Copyright &copy; 2013 Sobey</p>
+	</footer>
+
+    </div> <!-- /container -->
+</body>
+</html>
+
+
+
+
+
+
+
+
+
