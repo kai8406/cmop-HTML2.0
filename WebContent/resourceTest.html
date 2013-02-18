@@ -84,12 +84,15 @@
 		});
 	 
 	 
-	  //动态的添加参数
-	  addParam("a.clone");
-	  
-	 function addParam(obj) {
-		 
-		$(document).on("click", obj, function() {
+	 //动态的添加参数
+	 cloneParamTable();
+	 
+	 
+ });
+ 
+ function cloneParamTable() {
+	 
+		$(document).on("click","a.clone" , function() {
 			
 			var $this = $(this);
 			var $tr = $this.closest('tr.clone');
@@ -101,23 +104,18 @@
 				}
 				 $tr.remove();
 			} else {
-				
-				/*
-				if(!$("form").valid()){
+				/*  
+				if(!$this.closest("form").valid()){
 		    		return false;
 		    	}
-				*/
-				
+				 */
 				var $clone = $tr.clone();
-				$clone.find(':text').val(''); //清空文本
+				$clone.find('input[type=text]').val(''); //清空文本
 				$tr.after($clone);
 			}
 		});
 		
 	}
-	 
-	 
- });
  </script>
 <title>CMOP HTML V2.0</title>
 
@@ -177,24 +175,14 @@
 				</div>
 		</div>
 		 
-		<table  class="table table-bordered table-condensed"  >
-			<thead>
-				<tr>
-					<th>应用名称</th>
-					<th>应用版本</th>
-					<th>部署路径</th>
-					<th></th>
-				</tr>
-			</thead>
+		<table class="table table-bordered table-condensed"  >
+			<thead><tr><th>应用名称</th><th>应用版本</th><th>部署路径</th><th></th></tr></thead>
 			<tbody>
 				<tr class="clone">
-					<td><input type="text" id="applicationName" name="applicationName" class="input-small required" placeholder="...应用名称"></td>
-					<td><input type="text" id="applicationVersion" name="applicationVersion" class="input-small required" placeholder="...应用版本"></td>
-					<td><input type="text" id="applicationDeployPath" name="applicationDeployPath" class="input-small required" placeholder="...部署路径"></td>
-					<td>
-					<a class="btn clone">添加</a>
-					<a class="btn clone disabled" >删除</a>
-					</td>
+					<td><input type="text" name="applicationName" class="input-small required" maxlength="45" placeholder="...应用名称"></td>
+					<td><input type="text" name="applicationVersion" class="input-small required" maxlength="45" placeholder="...应用版本"></td>
+					<td><input type="text" name="applicationDeployPath" class="input-small required" maxlength="45" placeholder="...部署路径"></td>
+					<td><a class="btn clone">添加</a><a class="btn clone disabled" >删除</a></td>
 				</tr>
 			</tbody>
 		</table>		
