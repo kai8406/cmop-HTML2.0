@@ -4,7 +4,7 @@ $(document).ready(function() {
 	
 	// === uniform === //
 	
-	 $("input:radio,input:checkbox,input:file").uniform();
+	// $("input:radio,input:checkbox,input:file").uniform();
 	
 	 
 	// === Tooltips === //
